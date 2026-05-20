@@ -736,7 +736,7 @@ function EventCard({ ev, onClick, onDelete }) {
 // ─── ExpenseTab ───────────────────────────────────────────────
 function ExpenseTab({ events, setEvents, people, currentEventId, setCurrentEventId }) {
   const [showNew, setShowNew] = useState(false);
-  const event = events.find(e => e.id === currentEventId);
+  const event = events.find(e => e.id === currentEventId && !e.finished);
   const createEvent = data => {
     const ev = { id: uid(), ...data, expenses: [], createdAt: Date.now() };
     setEvents(p => [ev, ...p]);
