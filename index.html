@@ -83,6 +83,61 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(0
 .member-chip.sel{background:linear-gradient(145deg,#1E1200,#130C00)}
 .settle-row{display:flex;align-items:center;gap:9px;padding:11px 12px;background:#0D0A00;border-radius:12px;margin-bottom:6px;border:1px solid rgba(255,100,0,0.12)}
 .finished-banner{display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:13px;background:linear-gradient(145deg,#081A0E,#050E08);border:1px solid rgba(16,185,129,0.3);margin-bottom:13px;box-shadow:0 0 20px rgba(16,185,129,0.07)}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+/* dvh fallback for older iOS */
+@supports not (height:100dvh){
+  .app{height:100vh;height:-webkit-fill-available}
+  .modal{max-height:92vh}
+}
+
+/* Small phones ≤ 390px */
+@media(max-width:390px){
+  .nav-icon-3d{width:46px;height:46px;border-radius:13px}
+  .nav-item{font-size:9.5px}
+  .type-btn{padding:8px 3px}
+  .stat-value{font-size:23px}
+  .modal{padding-left:14px;padding-right:14px}
+}
+
+/* Very small phones ≤ 360px */
+@media(max-width:360px){
+  .nav-icon-3d{width:42px;height:42px;border-radius:11px}
+  .nav-item{font-size:9px;gap:3px;padding:4px 2px}
+  .card{padding:11px}
+  .stat-value{font-size:20px}
+  .stat-box{padding:11px}
+  .type-grid{gap:4px}
+  .type-btn{padding:7px 2px}
+  .type-btn-label{font-size:8px}
+  .emoji-grid{grid-template-columns:repeat(5,1fr)}
+  .section-title{font-size:9px}
+  .modal{padding-left:12px;padding-right:12px}
+  .btn{font-size:12px}
+  .btn-sm{font-size:10.5px}
+}
+
+/* Tiny phones ≤ 320px */
+@media(max-width:320px){
+  .nav-icon-3d{width:38px;height:38px;border-radius:10px}
+  .card{padding:10px}
+  .type-grid{grid-template-columns:repeat(4,1fr);gap:3px}
+  .stat-value{font-size:18px}
+  .member-chip{padding:5px 8px}
+}
+
+/* Landscape on phones */
+@media(orientation:landscape) and (max-height:520px){
+  .header{padding-top:calc(5px + env(safe-area-inset-top));padding-bottom:5px}
+  .bottom-nav{padding-top:3px;padding-bottom:calc(3px + env(safe-area-inset-bottom))}
+  .nav-icon-3d{width:34px;height:34px;border-radius:9px}
+  .nav-item{font-size:9px;gap:2px}
+  .tab-content{padding:8px}
+  .empty-state{padding:16px 20px}
+  .card{padding:11px;margin-bottom:8px}
+  .modal{max-height:94dvh;max-height:94vh}
+  .form-group{margin-bottom:10px}
+}
 </style>
 </head>
 <body>
@@ -332,7 +387,7 @@ function ExpenseModal({ expense, people, onSave, onClose }) {
           <label className="form-label">Amount</label>
           <input className="form-input" type="number" inputMode="decimal" step="any" value={amount}
             onChange={e => setAmount(e.target.value)} placeholder="0" autoFocus
-            style={{fontSize:30,fontWeight:800,textAlign:'center',color:'#FF9030'}} />
+            style={{fontSize:'clamp(24px,7vw,30px)',fontWeight:800,textAlign:'center',color:'#FF9030'}} />
         </div>
         <div className="form-group">
           <label className="form-label">Type</label>
@@ -500,7 +555,7 @@ function EventDetail({ event, people, onBack, onUpdate }) {
         <div style={{display:'flex',alignItems:'center',gap:14,marginBottom:typeStats.length?12:0}}>
           <div style={{flex:1}}>
             <div style={{fontSize:10,color:'#C07840',marginBottom:4,textTransform:'uppercase',letterSpacing:'1px'}}>Total Amount</div>
-            <div style={{fontSize:36,fontWeight:900,lineHeight:1,color:'#FF9030',textShadow:'0 0 30px rgba(255,120,0,0.3)'}}>
+            <div style={{fontSize:'clamp(28px,8vw,36px)',fontWeight:900,lineHeight:1,color:'#FF9030',textShadow:'0 0 30px rgba(255,120,0,0.3)'}}>
               {fmtAmt(total)}
             </div>
             <div style={{fontSize:11,color:'#A06030',marginTop:5}}>{expenses.length} expense{expenses.length!==1?'s':''}</div>
